@@ -1,0 +1,66 @@
+<body>
+  <style>
+    h1,
+    p {
+      text-align: center;
+    }
+    table {
+      margin: auto;
+    }
+    td {
+      width: 1em;
+      height: 1em;
+    }
+  </style>
+  <h1>Life Game</h1>
+  <div id="$"></div>
+  <script>
+    let A = (n) => Array.from({ length: n }),
+      f = 0,
+      t = A(30).map(() => A(30).fill(0)),
+      d = (i, j) => ((t[i][j] = !t[i][j]), u()),
+      L = 0,
+      l = (i, j) =>
+        [
+          [i - 1, j - 1],
+          [i - 1, j],
+          [i - 1, j + 1],
+          [i, j - 1],
+          [i, j + 1],
+          [i + 1, j - 1],
+          [i + 1, j],
+          [i + 1, j + 1],
+        ].reduce((a, [i, j]) => a + (t[i]?.[j] ?? 0), 0),
+      n = () => (
+        (t = t.map((r, i) =>
+          r.map(
+            (c, j) => (
+              (L = l(i, j)), !c ? (L == 3 ? 1 : 0) : L < 2 || L > 3 ? 0 : 1
+            )
+          )
+        )),
+        u()
+      ),
+      u = () => {
+        $.innerHTML = `<p><button onclick="r()">${
+          f ? "Stop" : "Run"
+        }</button></p><table>${t.reduce(
+          (a, r, i) =>
+            a +
+            `<tr>${r.reduce(
+              (a, c, j) =>
+                a +
+                `<td style="background: ${
+                  c ? "#111" : "#ccc"
+                }" onclick="d(${i}, ${j})"></td>`,
+              ""
+            )}</tr>`,
+          ""
+        )}</table>`;
+      },
+      a = (f) => setTimeout(f, 500),
+      z = () => f && (n(), a(z)),
+      r = () => (f ? ((f = 0), u()) : ((f = 1), z()));
+    u();
+  </script>
+</body>
