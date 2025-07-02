@@ -1,34 +1,40 @@
-<h1 style="text-align: center; margin: 5rem">Cockroach Editor🪳</h1>
-<main>
-  <textarea rows="10"></textarea>
-</main>
-<style>
-  * {
-    box-sizing: border-box;
-  }
-  html,
-  body {
-    margin: 0;
-    padding: 0;
-    background: darkkhaki;
-  }
-  main {
-    display: flex;
-    flex-flow: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100dvh;
-    max-width: 600px;
-    width: 100%;
-    padding: 0 2rem;
-    position: relative;
-    margin: 0 auto;
-  }
-  textarea {
-    color: transparent;
-    background: none;
-    width: 100%;
-    font-size: 48px;
-  }
-</style>
-<script></script>
+<body onresize="u()">
+  <main>
+    <textarea id="t" oninput="u()"></textarea>
+    <canvas id="v"></canvas>
+  </main>
+  <style>
+    #t {
+      color: transparent;
+      background: none;
+      width: 100%;
+      height: 200px;
+      resize: none;
+    }
+    main {
+      position: relative;
+    }
+    #v {
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+    }
+  </style>
+  <script>
+    let d = document;
+    let $ = d.querySelector.bind(d);
+    /**
+     * @type CanvasRenderingContext2D
+     */
+    let c = v.getContext("2d");
+    function u() {
+      v.width = t.clientWidth;
+      v.height = t.clientHeight;
+      c.reset();
+      c.font = "bold 48px serif";
+      c.fillText(t.value, 0, 0);
+    }
+    u();
+  </script>
+</body>
