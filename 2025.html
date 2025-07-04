@@ -1,40 +1,29 @@
-<body onresize="u()">
-  <main>
-    <textarea id="t" oninput="u()"></textarea>
-    <canvas id="v"></canvas>
-  </main>
-  <style>
-    #t {
-      color: transparent;
-      background: none;
-      width: 100%;
-      height: 200px;
-      resize: none;
+<textarea id="t" oninput="u()"></textarea>
+<canvas id="v" onclick="t.focus()"></canvas>
+<style>
+  #v {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100dvh;
+    background: white;
+  }
+  body {
+    margin: 0;
+  }
+</style>
+<script>
+  let c = v.getContext("2d");
+  function u() {
+    t.focus();
+    c.reset();
+    for (let [s, i] of t.value.split("\n").map((v, i) => [v, i])) {
+      console.log(s, i);
+      c.font = "bold 48px sans-serif";
+      c.fillText(s, 0, 48 + 48 * i);
     }
-    main {
-      position: relative;
-    }
-    #v {
-      position: absolute;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-    }
-  </style>
-  <script>
-    let d = document;
-    let $ = d.querySelector.bind(d);
-    /**
-     * @type CanvasRenderingContext2D
-     */
-    let c = v.getContext("2d");
-    function u() {
-      v.width = t.clientWidth;
-      v.height = t.clientHeight;
-      c.reset();
-      c.font = "bold 48px serif";
-      c.fillText(t.value, 0, 0);
-    }
-    u();
-  </script>
-</body>
+  }
+  u();
+</script>
