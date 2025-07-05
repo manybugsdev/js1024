@@ -1,29 +1,17 @@
-<textarea id="t" oninput="u()"></textarea>
-<canvas id="v" onclick="t.focus()"></canvas>
-<style>
-  #v {
-    z-index: 1;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100dvh;
-    background: white;
-  }
-  body {
-    margin: 0;
-  }
-</style>
-<script>
-  let c = v.getContext("2d");
-  function u() {
-    t.focus();
-    c.reset();
-    for (let [s, i] of t.value.split("\n").map((v, i) => [v, i])) {
-      console.log(s, i);
-      c.font = "bold 48px sans-serif";
-      c.fillText(s, 0, 48 + 48 * i);
+<body onclick="t.focus()">
+  <textarea id="t" oninput="u()"></textarea>
+  <canvas style="border: 1px solid" id="v" onclick="t.focus()"></canvas>
+  <script>
+    let c = v.getContext("2d");
+    function u() {
+      t.focus();
+      c.reset();
+      for (let [s, i] of t.value.split("\n").map((v, i) => [v, i])) {
+        console.log(s, i);
+        c.font = "bold 48px sans-serif";
+        c.fillText(s, 0, 48 + 48 * i);
+      }
     }
-  }
-  u();
-</script>
+    u();
+  </script>
+</body>
